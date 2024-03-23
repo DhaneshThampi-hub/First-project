@@ -1,0 +1,51 @@
+{% load static %}
+
+{% block body  %}
+
+{% include 'recruiternav.html' %}
+
+<h1>Edit job Details</h1>
+
+<form action="" method="post" name="edit_job_form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="jname">Job Name</label>
+    <input type="text" id="jname" placeholder="Enter Job name" name="jname" value="{{ job2.title }}" required>
+
+    <label for="sdate">Start date</label>
+    <input type="date" id="sdate" name="sdate" value="{{ job2.start_date|date:'Y-m-d' }}"><br><br>
+
+    <label for="edate">End Date</label>
+    <input type="date" id="edate" name="edate" value="{{ job2.end_date|date:'Y-m-d' }}"><br><br>
+
+    <label for="salary">Salary</label>
+    <input type="text" id="salary" name="salary" value="{{ job2.salary }}" required><br><br>
+
+    <label for="exp">Experience(Years)</label>
+    <input type="text" id="exp" name="exp" value="{{ job2.exp }}" required><br><br>
+
+    <label for="location">Company location</label>
+    <input type="text" id="location" name="location" value="{{ job2.location }}" required><br><br>
+
+    <label for="skills">Skills</label>
+    <input type="text" id="skills" name="skills" placeholder="Enter skills" value="{{ job2.skills }}" required><br><br>
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description" cols="30" rows="10" required>{{ job2.description }}</textarea><br><br>
+
+    <input type="submit" value="Submit">
+</form>
+
+{% if error == "no" %}
+    <script>
+        alert("Job updated successfully");
+        window.location.href = "{% url 'edit_job' job2.id %}";
+    </script>
+{% endif %}
+
+{% if error == "yes" %}
+    <script>
+        alert("Failed to update job. Please try again.");
+    </script>
+{% endif %}
+
+{% endblock %}

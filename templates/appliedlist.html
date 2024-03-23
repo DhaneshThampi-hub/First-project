@@ -1,0 +1,47 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'recruiternav.html' %}
+
+<h1>Applied Candidate List</h1>
+<table border="2">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Applied Date</th>
+            <th>Resume</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if data %}
+            {% for job in data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ job.commonuser.user.first_name }} {{ job.commonuser.user.last_name }}</td>
+                    <td>{{ job.commonuser.user.username }}</td>
+                    <td>{{ job.commonuser.mobile }}</td>
+                    <td>{{ job.job.title }}</td>
+                    <td>{{ job.job.recruiter.company }}</td>
+                    <td>{{ job.applydate }}</td>
+                    <td><a href="{{ job.resume.url }}">Resume</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="8">No Candidates available</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="8">No Candidates available</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+{% endblock %}

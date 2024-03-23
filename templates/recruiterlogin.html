@@ -1,0 +1,36 @@
+{% load static %}
+
+{% block body  %}
+
+{% include 'navigation.html' %}
+
+<h1>Recruiter Login</h1>
+
+<form  action="" method="post">
+    {% csrf_token %}
+    <label for="">Email</label>
+    <input type="text" placeholder="enter Email" name="uname"><br><br>
+    <label for="">Password</label>
+    <input type="password" placeholder="Enter Password" name="pass"><br>
+    <input type="submit"><br><br>
+    <a href="{% url  'recruiter_signup' %}" >Register</a>
+</form>
+
+
+
+{% if error == "no" %}
+    <script>
+        alert("Login success");
+        window.location.href = "{% url 'recruiter_home' %}";
+    </script>
+{% endif %}
+
+{% if error == "yes" %}
+    <script>
+        alert("Try Again");
+       
+    </script>
+{% endif %}
+
+
+{% endblock %}

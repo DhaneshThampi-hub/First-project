@@ -1,0 +1,29 @@
+<html>
+    <head>
+        {% load static %}
+        <title> job portal</title>
+    </head>
+    <body>
+        <h1>Job portal</h1>
+        <nav>
+            <a>jobportal</a>
+            <ul >
+               <center> <li >
+                    <a href="{% url 'index' %}">Home</a>
+                </li><br>
+                <li>
+                    <a href="{% url 'latest_jobs' %}">jobs</a>
+                </li><br>
+                <li>
+                    <a  href="{% url 'user_login' %}">User login</a>
+                </li><br>
+                <li>
+                    <a  href="{% url 'recruiter_login' %}">Recruter login</a>
+                </li><br>
+                <li>
+                    <a  href="{% url 'admin_login' %}">Admin login</a>
+                </li></center>
+            </ul>
+        </nav>
+    </body>
+</html>

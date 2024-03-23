@@ -1,0 +1,45 @@
+{% load static %}
+
+{% block body  %}
+
+{% include 'usernav.html' %}
+
+<h1>Job List</h1>
+<table border="2">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Company Name</th>
+            <th>Job Title</th>
+            <th>Location</th>
+            <th>Post Date</th>
+            <th>End Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ job.recruiter.company }}</td>
+            <td>{{ job.title }}</td>
+            <td>{{ job.location }}</td>
+            <td>{{ job.start_date }}</td>
+            <td>{{ job.end_date }}</td>
+            <td>
+                {% if job.id in li %}
+                    Applied
+                {% else %}
+                    <a href="{% url 'job_detail' job.id %}">Apply</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">No jobs available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load static %}
+
+{% block body  %}
+
+{% include 'navigation.html' %}
+
+<h1>Admin Login</h1>
+
+<form class="container" action="" method="post">
+    {% csrf_token %}
+    <label for="">Username</label>
+    <input type="text" placeholder="enter Username" name="uname"><br><br>
+    <label for="">Password</label>
+    <input type="password" placeholder="Enter Password" name="pass"><br>
+    <input type="submit">
+</form>
+
+
+{% if error == "no" %}
+    <script>
+        alert("Login success");
+        window.location.href = "{% url 'admin_home' %}";
+    </script>
+{% endif %}
+
+{% if error == "yes" %}
+    <script>
+        alert("Invalid user name or password");
+    </script>
+{% endif %}
+
+{% endblock %}

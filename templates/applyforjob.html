@@ -1,0 +1,42 @@
+{% load static %}
+
+{% block body  %}
+
+{% include 'usernav.html' %}
+
+<h1>Apply for job</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<label for="">Upload resume:  </label>
+<input type="file" name="resume"><br>
+<input type="submit" value="submit">
+
+</form>
+
+{% if error == "close" %}
+    <script>
+        alert("Application closed ");
+        window.location.href = "{% url 'user_joblist' %}";
+    </script>
+{% endif %}
+
+{% if error == "notopen" %}
+    <script>
+        alert("Application not opened ");
+        window.location.href = "{% url 'user_joblist' %}";
+    </script>
+{% endif %}
+
+
+{% if error == "done" %}
+    <script>
+        alert("Applied ");
+        window.location.href = "{% url 'user_joblist' %}";
+    </script>
+{% endif %}
+
+
+
+
+{% endblock %}

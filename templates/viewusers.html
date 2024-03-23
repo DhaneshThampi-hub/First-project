@@ -1,0 +1,38 @@
+{% load static %}
+
+{% block body  %}
+
+{% include 'adminnav.html' %}
+
+
+<h1>View all users</h1>
+<table border="1">
+    <th>
+        <tr>
+            <th>No.</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Ph_num</th>
+            <th>Gender</th>
+            <th>Resume</th>
+            <th>Action</th>
+
+        </tr>
+    </th>
+    <tbody>
+        {% for data in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ data.user.first_name }} {{ data.user.last_name }}</td>
+            <td>{{ data.user.username }}</td>
+            <td>{{ data.mobile }}</td>
+            <td>{{ data.gender }}</td>
+            <td><a href="{{ data.resume.url }}">{{ data.resume }}</a></td>
+            <td><a href="{% url 'delete_user' data.id %}">delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

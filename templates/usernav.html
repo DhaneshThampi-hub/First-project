@@ -1,0 +1,28 @@
+<html>
+    <head>
+        {% load static %}
+        <title> job portal</title>
+    </head>
+    <body>
+        <h1>Job portal</h1>
+        <h2>User Page</h2>
+        <nav>
+            <a>jobportal</a>
+            <ul>
+                <li>
+                    <a class="nav-link" href="{% url 'user_home' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'user_joblist' %}">job List</a>
+                </li>
+                <li>
+                    <a  href="{% url 'change_passworduser' %}">change password</a>
+                </li>
+                <li>
+                    <a href="{% url 'Logout' %}">logout</a>
+                </li>
+            </ul>
+            <a>welcome: {{ request.user.first_name }}</a>
+        </nav>
+    </body>
+</html>

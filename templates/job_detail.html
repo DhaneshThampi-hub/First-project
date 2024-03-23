@@ -1,0 +1,31 @@
+{% load static %}
+
+{% block body  %}
+
+{% include 'usernav.html' %}
+
+<h1>Job Details</h1>
+<h2>{{ data.title }}</h2>
+<p>company: {{ data.recruiter.company }} <a href="{% url 'user_joblist' %}">(view all jobs)</a></p>
+<p>loc: {{ data.location }}</p>
+<p>created on: {{ data.creationdate }}</p><br>
+<strong><p>salary: {{ data.salary }}</p></strong>
+<a href="{% url 'applyforjob' data.id %}">Apply</a>
+
+<h4>Overview</h4>
+<p>{{ data.description }}</p>
+
+<h4>Experience: {{ data.exp }}</h4>
+
+<h4>Skills: {{ data.skills }}</h4>
+
+<h4>Start_date: {{ data.start_date}}</h4>
+<h4>End_date: {{ data.end_date}}</h4>
+
+
+
+
+
+
+
+{% endblock %}
