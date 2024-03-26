@@ -1,10 +1,12 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from .models import*
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from datetime import date
 from .models import Jobs
 from datetime import datetime
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 def index(request):
@@ -411,6 +413,26 @@ def applyforjob(request,pid):
             r=request.FILES['resume']
             Apply.objects.create(job=job,commonuser=commonuser ,resume=r,applydate=date.today())
             error="done"
+            job_seeker_email_subject="confimation",
+            job_seeker_email_body = f"Dear {commonuser.user.get_full_name()},\n\nYour application for the job '{job.title}' has been received.\n\nThank you.\n\nSincerely,\nThe Hiring Team"
+            send_mail(
+            job_seeker_email_subject,
+            job_seeker_email_body,
+            settings.EMAIL_HOST_USER,  # Sender's email address
+            ['dhaneshthampi10@gmail.com'],
+            fail_silently=True  # Job seeker's email
+                 )
+                
+                # # Send email to employer
+            employer_email_subject = 'New Job Application'
+            employer_email_body = f"Dear {job.recruiter.user.get_full_name()},\n\nA new application has been received for the job '{job.title}'.\n\nSincerely,\nThe Hiring Team"
+            send_mail(
+                    employer_email_subject,
+                    employer_email_body,
+                    settings.EMAIL_HOST_USER,  # Sender's email address
+                    ['dhaneshthampi10@gmail.com'], 
+                     fail_silently=True # Employer's email
+            )
     d= {'error':error}
     return render(request,'applyforjob.html',d)
 

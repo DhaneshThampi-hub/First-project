@@ -4,4 +4,3 @@ from .models import *
 admin.site.register(Commonuser)
 admin.site.register(Recruiter)
 admin.site.register(Jobs)
-admin.site.register(Apply)

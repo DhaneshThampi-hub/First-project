@@ -124,3 +124,21 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL= '/media/'
 MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+
+import environ
+
+# Initialize environ
+env = environ.Env()
+
+# Reading .env file
+environ.Env.read_env()
+
+# Set email backend to use Mailtrap SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'dhaneshthampi10@gmail.com'
+EMAIL_HOST_PASSWORD = 'xlmuvaehecmekcik'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False

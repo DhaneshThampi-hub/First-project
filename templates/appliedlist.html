@@ -19,8 +19,8 @@
         </tr>
     </thead>
     <tbody>
-        {% if data %}
             {% for job in data %}
+            {% if request.user.id == job.job.recruiter.user.id %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ job.commonuser.user.first_name }} {{ job.commonuser.user.last_name }}</td>
@@ -31,16 +31,9 @@
                     <td>{{ job.applydate }}</td>
                     <td><a href="{{ job.resume.url }}">Resume</a></td>
                 </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="8">No Candidates available</td>
-                </tr>
+                {% endif %}
             {% endfor %}
-        {% else %}
-            <tr>
-                <td colspan="8">No Candidates available</td>
-            </tr>
-        {% endif %}
+        
     </tbody>
 </table>
 

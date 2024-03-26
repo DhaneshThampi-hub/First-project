@@ -47,4 +47,4 @@ class Apply(models.Model):
     applydate =models.DateField()
     
     def __str__(self):
-        return self.id
+        return str(self.id)
